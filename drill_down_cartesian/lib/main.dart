@@ -19,7 +19,7 @@ class DrillDown extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
-  num getRandomInt(num min, num max) {
+  num getRandomInt(int min, int max) {
     final Random random = Random();
     return min + random.nextInt(max - min);
   }
@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
         chart = SfCartesianChart(
             backgroundColor: Colors.white,
             primaryXAxis: CategoryAxis(),
-            series: <ChartSeries<SalesData, String>>[
+            series: <ColumnSeries<SalesData, String>>[
               ColumnSeries<SalesData, String>(
                   dataSource: <SalesData>[
                     SalesData('Peter', getRandomInt(15, 23)),
@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
         chart = SfCartesianChart(
             backgroundColor: Colors.white,
             primaryXAxis: CategoryAxis(),
-            series: <ChartSeries<SalesData, String>>[
+            series: <ColumnSeries<SalesData, String>>[
               ColumnSeries<SalesData, String>(
                   dataSource: <SalesData>[
                     SalesData('Peter', getRandomInt(15, 23)),
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
           PieSeries<SalesData, String>(
               animationDuration: 0,
               onPointTap: (ChartPointDetails pointInteractionDetails) {
-                getDrilledChart(pointInteractionDetails.pointIndex);
+                getDrilledChart(pointInteractionDetails.pointIndex!);
               },
               dataSource: chartData,
               xValueMapper: (SalesData sales, _) => sales.year,
@@ -142,5 +142,5 @@ class SalesData {
   SalesData(this.year, this.sales);
 
   final String year;
-  final int sales;
+  final num sales;
 }
